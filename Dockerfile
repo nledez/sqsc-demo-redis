@@ -4,6 +4,7 @@ WORKDIR /go/src/$GOMODPATH
 COPY . .
 ENV GOOS linux
 ENV CGO_ENABLED 0
+ENV GO111MODULE "on"
 ARG VERSION
 RUN go install -ldflags "-X main.version=${VERSION}" .
 
