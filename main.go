@@ -43,6 +43,15 @@ func main() {
 	}
 	fmt.Println("Redis DB: " + redisDb)
 
+	client := redis.NewClient(&redis.Options{
+		Addr:     redisAddress + ":" + redisPort,
+		Password: redisPassword, // no password set
+		DB:       redisDbToUse,  // use default DB
+	})
+
+	pong, err := client.Ping().Result()
+	fmt.Println(pong, err)
+
 	http.HandleFunc("/ping-redis", func(w http.ResponseWriter, r *http.Request) {
 		client := redis.NewClient(&redis.Options{
 			Addr:     redisAddress + ":" + redisPort,
