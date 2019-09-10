@@ -65,6 +65,9 @@ func main() {
 			Addr:     redisAddress + ":" + redisPort,
 			Password: redisPassword, // no password set
 			DB:       redisDbToUse,  // use default DB
+			TLSConfig: &tls.Config{
+				InsecureSkipVerify: true,
+			},
 		})
 
 		pong, err := client.Ping().Result()
