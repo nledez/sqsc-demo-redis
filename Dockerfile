@@ -27,9 +27,10 @@ RUN apt-get update && apt-get install -y \
 	netcat-traditional \
 	lsof \
 	nmap \
+	bash-completion \
+	iproute2 \
 	redis-tools
 COPY --from=build /go/bin/sqsc-demo-redis /bin/sqsc-demo-redis
-ENV PATH /bin
 WORKDIR /
 EXPOSE 8081
 CMD ["sqsc-demo-redis"]

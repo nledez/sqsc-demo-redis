@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/tls"
 	"fmt"
 	"github.com/go-redis/redis"
 	"log"
@@ -47,6 +48,9 @@ func main() {
 		Addr:     redisAddress + ":" + redisPort,
 		Password: redisPassword, // no password set
 		DB:       redisDbToUse,  // use default DB
+		TLSConfig: &tls.Config{
+			InsecureSkipVerify: true,
+		},
 	})
 
 	pong, err := client.Ping().Result()
