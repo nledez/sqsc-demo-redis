@@ -52,6 +52,10 @@ func main() {
 	pong, err := client.Ping().Result()
 	fmt.Println(pong, err)
 
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "Nope\n")
+	})
+
 	http.HandleFunc("/ping-redis", func(w http.ResponseWriter, r *http.Request) {
 		client := redis.NewClient(&redis.Options{
 			Addr:     redisAddress + ":" + redisPort,
