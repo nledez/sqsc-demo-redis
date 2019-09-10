@@ -17,3 +17,19 @@ ENV PATH /bin
 WORKDIR /
 EXPOSE 8081
 CMD ["sqsc-demo-redis"]
+
+FROM ubuntu AS debug
+LABEL name="sqsc-demo-redis"
+LABEL version=1.0
+LABEL maintainer SquareScale Engineering <engineering@squarescale.com>
+RUN apt-get update && apt-get install -y \
+	iputils-ping \
+	netcat-traditional \
+	lsof \
+	nmap \
+	redis-tools
+COPY --from=build /go/bin/sqsc-demo-redis /bin/sqsc-demo-redis
+ENV PATH /bin
+WORKDIR /
+EXPOSE 8081
+CMD ["sqsc-demo-redis"]
