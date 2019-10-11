@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"crypto/tls"
 	"errors"
 	"fmt"
 	"log"
@@ -214,9 +215,9 @@ func newRedisClient() (*redis.Client, error) {
 			Addr:     ci.fullAddr(),
 			Password: ci.passwd,
 			DB:       ci.db,
-			//TLSConfig: &tls.Config{
-			//	InsecureSkipVerify: true,
-			//},
+			TLSConfig: &tls.Config{
+				InsecureSkipVerify: true,
+			},
 		},
 	), nil
 }
